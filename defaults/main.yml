@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: MIT-0
+---
+# defaults file for whalej84.uv
+uv_install_url: 'https://astral.sh/uv/install.sh'
+uv_install_script: '/tmp/uv_install.sh'
+uv_bin_path: "{{ ansible_user_dir }}/.local/bin"

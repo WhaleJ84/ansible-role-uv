@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: MIT-0
+---
+# tasks file for whalej84.uv
+- name: INSTALL | uv
+  tags:
+    - install
+  block:
+    - name: REGISTER | Check if uv is installed
+      ansible.builtin.stat:
+        path: "{{ uv_bin_path }}/uv"
+      register: uv_binary
+
+    - name: INSTALL | uv
+      when: not uv_binary.stat.exists
+      block:
+        - name: INSTALL | Ensure uv script is downloaded
+          ansible.builtin.get_url:
+            url: "{{ uv_install_url }}"
+            dest: "{{ uv_install_script }}"
+            mode: '0755'
+
+        - name: INSTALL | Ensure uv script has been executed
+          ansible.builtin.command:
+            cmd: "sh {{ uv_install_script }}"
+            creates: "{{ uv_bin_path }}/uv"

@@ -23,3 +23,15 @@
           ansible.builtin.command:
             cmd: "sh {{ uv_install_script }}"
             creates: "{{ uv_bin_path }}/uv"
+
+- name: CONFIGURE | uv
+  tags:
+    - configure
+  block:
+    - name: CONFIGRE | Ensure uv_bin_path is in PATH
+      when: uv_bin_path not in ansible_env.PATH and shell.rc is defined
+      ansible.builtin.blockinfile:
+        path: "{{ shell.rc }}"
+        block: |
+          PATH="{{ uv_bin_path }}:$PATH"
+        mode: '0644'

@@ -25,6 +25,10 @@ Role Variables
 
 See [defaults](./defaults/main.yml).
 
+| Name     | Type   | Description                                                                     | Default |
+| -------- | ------ | ------------------------------------------------------------------------------- | ------- |
+| shell.rc | string | An absolute path to the configuration file of your shell (e.g. `$HOME/.bashrc`) |         |
+
 Dependencies
 ------------
 
